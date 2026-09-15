@@ -1,0 +1,3 @@
+model,accuracy,accuracy_pct,syntax_errors,refusals_timeouts,incorrect_results,p50_latency_ms,p95_latency_ms,mean_latency_ms,cost_per_1k_usd,cost_100x_usd,throughput
+gemma-4-12b-heretic-abliterated@q6_k,30/50,60.0,1,0,19,5530.1,15494.9,6625.2,0.1537,15.37,5.38
+gemini-3.1-flash-lite,30/50,60.0,2,0,18,1974.4,3865.9,2160.7,0.1268,12.68,462.82

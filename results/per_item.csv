@@ -1,0 +1,106 @@
+item_id,model,latency_ms,is_correct,status,input_tokens,output_tokens,output_sql
+1,gemma-4-12b-heretic-abliterated@q6_k,5484.81,1,correct,305,7,SELECT COUNT(*) FROM Customer;
+1,gemini-3.1-flash-lite,2140.3,1,correct,290,6,SELECT count(*) FROM Customer;
+2,gemma-4-12b-heretic-abliterated@q6_k,3038.64,1,correct,305,9,SELECT Name FROM Genre ORDER BY Name ASC;
+2,gemini-3.1-flash-lite,1842.86,1,correct,290,9,SELECT Name FROM Genre ORDER BY Name ASC;
+3,gemma-4-12b-heretic-abliterated@q6_k,3047.69,1,correct,309,7,SELECT COUNT(*) FROM Track;
+3,gemini-3.1-flash-lite,3852.96,1,correct,294,5,SELECT count(*) FROM Track;
+4,gemma-4-12b-heretic-abliterated@q6_k,4506.29,1,correct,316,15,"SELECT FirstName, LastName FROM Employee WHERE Title = 'Sales Support Agent';"
+4,gemini-3.1-flash-lite,2598.58,1,correct,301,14,"SELECT FirstName, LastName FROM Employee WHERE Title = 'Sales Support Agent';"
+5,gemma-4-12b-heretic-abliterated@q6_k,2432.61,1,correct,311,11,SELECT Name FROM Artist WHERE Name LIKE 'The%';
+5,gemini-3.1-flash-lite,2203.69,1,correct,296,10,SELECT Name FROM Artist WHERE Name LIKE 'The%';
+6,gemma-4-12b-heretic-abliterated@q6_k,3044.41,1,correct,309,13,SELECT COUNT(*) FROM Invoice WHERE BillingCountry = 'USA';
+6,gemini-3.1-flash-lite,2494.61,1,correct,294,12,SELECT count(*) FROM Invoice WHERE BillingCountry = 'USA';
+7,gemma-4-12b-heretic-abliterated@q6_k,4403.37,1,correct,314,14,"SELECT ROUND(SUM(Total), 2) FROM Invoice;"
+7,gemini-3.1-flash-lite,2667.82,1,correct,299,13,"SELECT ROUND(SUM(Total), 2) FROM Invoice;"
+8,gemma-4-12b-heretic-abliterated@q6_k,3628.5,0,incorrect_results,311,16,"SELECT Name, UnitPrice FROM Track ORDER BY UnitPrice DESC LIMIT 5;"
+8,gemini-3.1-flash-lite,2006.53,0,incorrect_results,296,13,SELECT * FROM Track ORDER BY UnitPrice DESC LIMIT 5;
+9,gemma-4-12b-heretic-abliterated@q6_k,2670.88,1,correct,309,10,SELECT DISTINCT Country FROM Customer ORDER BY Country ASC;
+9,gemini-3.1-flash-lite,1859.7,1,correct,294,10,SELECT DISTINCT Country FROM Customer ORDER BY Country ASC;
+10,gemma-4-12b-heretic-abliterated@q6_k,2811.73,1,correct,310,9,SELECT SUM(Milliseconds) FROM Track;
+10,gemini-3.1-flash-lite,1982.31,1,correct,295,7,SELECT SUM(Milliseconds) FROM Track;
+11,gemma-4-12b-heretic-abliterated@q6_k,7399.28,1,correct,312,39,SELECT T1.Title FROM Album AS T1 JOIN Artist AS T2 ON T1.ArtistId = T2.ArtistId WHERE T2.Name = 'AC/DC';
+11,gemini-3.1-flash-lite,1966.59,1,correct,297,38,SELECT T1.Title FROM Album AS T1 JOIN Artist AS T2 ON T1.ArtistId = T2.ArtistId WHERE T2.Name = 'AC/DC';
+12,gemma-4-12b-heretic-abliterated@q6_k,3843.2,1,correct,314,22,"SELECT COUNT(*) FROM Invoice WHERE strftime('%Y', InvoiceDate) = '2010';"
+12,gemini-3.1-flash-lite,2811.18,1,correct,299,52,SELECT COUNT(*) FROM Invoice WHERE InvoiceDate BETWEEN '2010-01-01 00:00:00' AND '2010-12-31 23:59:59';
+13,gemma-4-12b-heretic-abliterated@q6_k,3302.49,1,correct,305,12,SELECT count(*) FROM Customer WHERE Country = 'Canada';
+13,gemini-3.1-flash-lite,1709.17,1,correct,290,11,SELECT count(*) FROM Customer WHERE Country = 'Canada';
+14,gemma-4-12b-heretic-abliterated@q6_k,4454.06,1,correct,313,20,"SELECT Title, HireDate FROM Employee WHERE FirstName = 'Andrew' AND LastName = 'Adams';"
+14,gemini-3.1-flash-lite,2167.94,1,correct,298,19,"SELECT Title, HireDate FROM Employee WHERE FirstName = 'Andrew' AND LastName = 'Adams';"
+15,gemma-4-12b-heretic-abliterated@q6_k,2408.92,1,correct,311,12,SELECT COUNT(*) FROM Track WHERE Composer IS NOT NULL;
+15,gemini-3.1-flash-lite,1571.53,1,correct,296,11,SELECT count(*) FROM Track WHERE Composer IS NOT NULL;
+16,gemma-4-12b-heretic-abliterated@q6_k,6202.43,0,incorrect_results,311,56,"SELECT T1.FirstName, T1.LastName, SUM(T2.Total) AS TotalSpent FROM Customer AS T1 JOIN Invoice AS T2 ON T1.CustomerId = T2.CustomerId GROUP BY T1.CustomerId ORDER BY TotalSpent DESC LIMIT 5;"
+16,gemini-3.1-flash-lite,3058.27,0,incorrect_results,296,51,"SELECT c.FirstName, c.LastName, SUM(i.Total) AS TotalSpent
+FROM Customer c
+JOIN Invoice i ON c.CustomerId = i.CustomerId
+GROUP BY c.CustomerId
+ORDER BY TotalSpent DESC
+LIMIT 5;"
+17,gemma-4-12b-heretic-abliterated@q6_k,4831.56,0,incorrect_results,305,38,SELECT Genre.Name FROM Genre JOIN Track ON Genre.GenreId = Track.GenreId GROUP BY Genre.GenreId ORDER BY COUNT(Track.TrackId) DESC LIMIT 1;
+17,gemini-3.1-flash-lite,3175.69,0,incorrect_results,290,41,SELECT T1.Name FROM Genre AS T1 JOIN Track AS T2 ON T1.GenreId = T2.GenreId GROUP BY T1.Name ORDER BY COUNT(*) DESC LIMIT 1;
+18,gemma-4-12b-heretic-abliterated@q6_k,4629.11,1,correct,316,18,SELECT COUNT(*) FROM Track WHERE Milliseconds > 300000;
+18,gemini-3.1-flash-lite,2881.76,1,correct,301,17,SELECT COUNT(*) FROM Track WHERE Milliseconds > 300000;
+19,gemma-4-12b-heretic-abliterated@q6_k,4371.25,1,correct,314,22,"SELECT BillingCountry, SUM(Total) FROM Invoice GROUP BY BillingCountry ORDER BY SUM(Total) DESC;"
+19,gemini-3.1-flash-lite,2013.43,1,correct,299,22,"SELECT BillingCountry, SUM(Total) FROM Invoice GROUP BY BillingCountry ORDER BY SUM(Total) DESC;"
+20,gemma-4-12b-heretic-abliterated@q6_k,9627.34,0,incorrect_results,310,49,SELECT T1.Name FROM Artist AS T1 JOIN Album AS T2 ON T1.ArtistId = T2.ArtistId GROUP BY T1.ArtistId ORDER BY COUNT(T2.AlbumId) DESC LIMIT 5;
+20,gemini-3.1-flash-lite,3944.88,0,incorrect_results,295,48,SELECT T1.Name FROM Artist AS T1 JOIN Album AS T2 ON T1.ArtistId = T2.ArtistId GROUP BY T1.ArtistId ORDER BY COUNT(T2.AlbumId) DESC LIMIT 5;
+21,gemma-4-12b-heretic-abliterated@q6_k,5380.1,0,incorrect_results,310,18,"SELECT SupportRepId, COUNT(CustomerId) FROM Customer GROUP BY SupportRepId;"
+21,gemini-3.1-flash-lite,3162.63,1,correct,295,38,"SELECT e.FirstName, e.LastName, COUNT(c.CustomerId) FROM Employee e JOIN Customer c ON e.EmployeeId = c.SupportRepId GROUP BY e.EmployeeId;"
+22,gemma-4-12b-heretic-abliterated@q6_k,4806.63,0,incorrect_results,309,37,"SELECT Playlist.Name, COUNT(PlaylistTrack.TrackId) FROM Playlist JOIN PlaylistTrack ON Playlist.PlaylistId = PlaylistTrack.PlaylistId GROUP BY Playlist.PlaylistId;"
+22,gemini-3.1-flash-lite,3462.18,1,correct,294,45,"SELECT T1.Name, COUNT(T2.TrackId) FROM Playlist AS T1 LEFT JOIN PlaylistTrack AS T2 ON T1.PlaylistId = T2.PlaylistId GROUP BY T1.PlaylistId;"
+23,gemma-4-12b-heretic-abliterated@q6_k,3441.68,0,incorrect_results,315,24,"SELECT BillingCountry, AVG(Total) FROM Invoice GROUP BY BillingCountry HAVING COUNT(InvoiceId) >= 5;"
+23,gemini-3.1-flash-lite,3605.46,0,incorrect_results,300,23,"SELECT BillingCountry, AVG(Total) FROM Invoice GROUP BY BillingCountry HAVING COUNT(InvoiceId) >= 5;"
+24,gemma-4-12b-heretic-abliterated@q6_k,5345.2,0,incorrect_results,308,49,SELECT T1.Name FROM MediaType AS T1 JOIN Track AS T2 ON T1.MediaTypeId = T2.MediaTypeId GROUP BY T1.MediaTypeId ORDER BY COUNT(T2.TrackId) ASC LIMIT 1;
+24,gemini-3.1-flash-lite,1217.53,0,incorrect_results,293,41,SELECT T2.Name FROM Track AS T1 JOIN MediaType AS T2 ON T1.MediaTypeId = T2.MediaTypeId GROUP BY T2.Name ORDER BY COUNT(*) ASC LIMIT 1;
+25,gemma-4-12b-heretic-abliterated@q6_k,5520.64,1,correct,314,50,SELECT COUNT(IL.TrackId) FROM InvoiceLine IL JOIN Track T ON IL.TrackId = T.TrackId JOIN Album A ON T.AlbumId = A.AlbumId WHERE A.Title = 'Balls to the Wall';
+25,gemini-3.1-flash-lite,2205.45,1,correct,299,48,SELECT SUM(il.Quantity) FROM InvoiceLine il JOIN Track t ON il.TrackId = t.TrackId JOIN Album a ON t.AlbumId = a.AlbumId WHERE a.Title = 'Balls to the Wall';
+26,gemma-4-12b-heretic-abliterated@q6_k,3453.89,1,correct,311,25,"SELECT BillingCity, SUM(Total) FROM Invoice GROUP BY BillingCity ORDER BY SUM(Total) DESC LIMIT 3;"
+26,gemini-3.1-flash-lite,5975.71,1,correct,296,26,"SELECT BillingCity, SUM(Total) AS TotalRevenue FROM Invoice GROUP BY BillingCity ORDER BY TotalRevenue DESC LIMIT 3;"
+27,gemma-4-12b-heretic-abliterated@q6_k,12593.39,1,correct,315,58,"SELECT T1.FirstName, T1.LastName, T1.Email FROM Customer AS T1 JOIN Employee AS T2 ON T1.SupportRepId = T2.EmployeeId WHERE T2.FirstName = 'Jane' AND T2.LastName = 'Peacock';"
+27,gemini-3.1-flash-lite,3829.86,1,correct,300,46,"SELECT c.FirstName, c.LastName, c.Email FROM Customer c JOIN Employee e ON c.SupportRepId = e.EmployeeId WHERE e.FirstName = 'Jane' AND e.LastName = 'Peacock';"
+28,gemma-4-12b-heretic-abliterated@q6_k,15628.06,1,correct,319,29,"SELECT ROUND(SUM(Total), 2) FROM Invoice WHERE strftime('%Y', InvoiceDate) = '2011';"
+28,gemini-3.1-flash-lite,1330.14,1,correct,304,59,"SELECT ROUND(SUM(Total), 2) FROM Invoice WHERE InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2011-12-31 23:59:59';"
+29,gemma-4-12b-heretic-abliterated@q6_k,8140.91,0,incorrect_results,312,43,"SELECT T1.Name, T2.Title FROM Track AS T1 JOIN Album AS T2 ON T1.AlbumId = T2.AlbumId ORDER BY T1.Milliseconds DESC LIMIT 5;"
+29,gemini-3.1-flash-lite,1273.4,0,incorrect_results,297,34,"SELECT T.Name, A.Title FROM Track T JOIN Album A ON T.AlbumId = A.AlbumId ORDER BY T.Milliseconds DESC LIMIT 5;"
+30,gemma-4-12b-heretic-abliterated@q6_k,3855.84,1,correct,314,13,SELECT COUNT(*) FROM Invoice WHERE BillingPostalCode IS NULL;
+30,gemini-3.1-flash-lite,1398.22,1,correct,299,12,SELECT count(*) FROM Invoice WHERE BillingPostalCode IS NULL;
+31,gemma-4-12b-heretic-abliterated@q6_k,7344.36,0,incorrect_results,313,40,SELECT AVG(T.Milliseconds / 1000.0) FROM Track T JOIN Genre G ON T.GenreId = G.GenreId WHERE G.Name = 'Rock';
+31,gemini-3.1-flash-lite,948.53,0,incorrect_results,298,37,SELECT AVG(T.Milliseconds) / 1000 FROM Track T JOIN Genre G ON T.GenreId = G.GenreId WHERE G.Name = 'Rock';
+32,gemma-4-12b-heretic-abliterated@q6_k,7042.74,0,incorrect_results,312,49,"SELECT T1.FirstName, T1.LastName FROM Customer AS T1 JOIN Invoice AS T2 ON T1.CustomerId = T2.CustomerId GROUP BY T1.CustomerId HAVING SUM(T2.Total) > 45;"
+32,gemini-3.1-flash-lite,1086.6,0,incorrect_results,297,38,"SELECT C.FirstName, C.LastName FROM Customer C JOIN Invoice I ON C.CustomerId = I.CustomerId GROUP BY C.CustomerId HAVING SUM(I.Total) > 45;"
+33,gemma-4-12b-heretic-abliterated@q6_k,3101.16,1,correct,313,12,"SELECT FirstName, LastName FROM Employee WHERE ReportsTo IS NULL;"
+33,gemini-3.1-flash-lite,1004.97,1,correct,298,11,"SELECT FirstName, LastName FROM Employee WHERE ReportsTo IS NULL;"
+34,gemma-4-12b-heretic-abliterated@q6_k,6070.02,0,incorrect_results,310,49,SELECT T1.Name FROM Track AS T1 JOIN InvoiceLine AS T2 ON T1.TrackId = T2.TrackId GROUP BY T1.TrackId ORDER BY SUM(T2.Quantity) DESC LIMIT 1;
+34,gemini-3.1-flash-lite,1341.57,0,incorrect_results,295,40,SELECT T.Name FROM Track T JOIN InvoiceLine IL ON T.TrackId = IL.TrackId GROUP BY T.TrackId ORDER BY SUM(IL.Quantity) DESC LIMIT 1;
+35,gemma-4-12b-heretic-abliterated@q6_k,9279.84,1,correct,314,60,SELECT COUNT(DISTINCT T1.ArtistId) FROM Album AS T1 JOIN Track AS T2 ON T1.AlbumId = T2.AlbumId JOIN Genre AS T3 ON T2.GenreId = T3.GenreId WHERE T3.Name = 'Jazz';
+35,gemini-3.1-flash-lite,1353.31,0,syntax_error,299,60,SELECT count(DISTINCT T.ArtistId) FROM Artist A JOIN Album Al ON A.ArtistId = Al.ArtistId JOIN Track T ON Al.AlbumId = T.AlbumId JOIN Genre G ON T.GenreId = G.GenreId WHERE G.Name = 'Jazz';
+36,gemma-4-12b-heretic-abliterated@q6_k,17535.08,0,incorrect_results,316,83,SELECT T1.Name FROM Artist AS T1 JOIN Album AS T2 ON T1.ArtistId = T2.ArtistId JOIN Track AS T3 ON T2.AlbumId = T3.AlbumId JOIN InvoiceLine AS T4 ON T3.TrackId = T4.TrackId GROUP BY T1.ArtistId ORDER BY SUM(T4.Quantity) DESC LIMIT 3;
+36,gemini-3.1-flash-lite,1339.45,0,incorrect_results,301,65,SELECT ar.Name FROM Artist ar JOIN Album al ON ar.ArtistId = al.ArtistId JOIN Track t ON al.AlbumId = t.AlbumId JOIN InvoiceLine il ON t.TrackId = il.TrackId GROUP BY ar.ArtistId ORDER BY SUM(il.Quantity) DESC LIMIT 3;
+37,gemma-4-12b-heretic-abliterated@q6_k,5539.57,1,correct,314,22,"SELECT CustomerId, FirstName, LastName FROM Customer WHERE CustomerId NOT IN (SELECT CustomerId FROM Invoice);"
+37,gemini-3.1-flash-lite,1262.89,1,correct,299,24,"SELECT CustomerId, FirstName || ' ' || LastName FROM Customer WHERE CustomerId NOT IN (SELECT CustomerId FROM Invoice);"
+38,gemma-4-12b-heretic-abliterated@q6_k,6455.88,0,incorrect_results,306,57,SELECT Genre.Name FROM Genre JOIN Track ON Genre.GenreId = Track.GenreId JOIN InvoiceLine ON Track.TrackId = InvoiceLine.TrackId GROUP BY Genre.GenreId ORDER BY SUM(InvoiceLine.UnitPrice * InvoiceLine.Quantity) DESC LIMIT 1;
+38,gemini-3.1-flash-lite,1474.4,0,incorrect_results,291,56,SELECT G.Name FROM Genre G JOIN Track T ON G.GenreId = T.GenreId JOIN InvoiceLine IL ON T.TrackId = IL.TrackId GROUP BY G.GenreId ORDER BY SUM(IL.UnitPrice * IL.Quantity) DESC LIMIT 1;
+39,gemma-4-12b-heretic-abliterated@q6_k,9803.24,1,correct,315,69,"SELECT T1.FirstName, T1.LastName FROM Customer AS T1 JOIN Invoice AS T2 ON T1.CustomerId = T2.CustomerId WHERE strftime('%Y', T2.InvoiceDate) = '2012' GROUP BY T1.CustomerId ORDER BY SUM(T2.Total) DESC LIMIT 1;"
+39,gemini-3.1-flash-lite,1613.38,1,correct,300,58,"SELECT C.FirstName, C.LastName FROM Customer C JOIN Invoice I ON C.CustomerId = I.CustomerId WHERE strftime('%Y', I.InvoiceDate) = '2012' GROUP BY C.CustomerId ORDER BY SUM(I.Total) DESC LIMIT 1;"
+40,gemma-4-12b-heretic-abliterated@q6_k,6760.52,1,correct,312,30,"SELECT Track.TrackId, Track.Name FROM Track WHERE Track.TrackId NOT IN (SELECT InvoiceLine.TrackId FROM InvoiceLine);"
+40,gemini-3.1-flash-lite,1077.65,1,correct,297,20,"SELECT TrackId, Name FROM Track WHERE TrackId NOT IN (SELECT TrackId FROM InvoiceLine);"
+41,gemma-4-12b-heretic-abliterated@q6_k,5701.56,0,incorrect_results,314,35,SELECT Title FROM Album JOIN Track ON Album.AlbumId = Track.AlbumId GROUP BY Album.AlbumId HAVING COUNT(Track.TrackId) > 20;
+41,gemini-3.1-flash-lite,1830.36,0,incorrect_results,299,47,SELECT T1.Title FROM Album AS T1 JOIN Track AS T2 ON T1.AlbumId = T2.AlbumId GROUP BY T1.AlbumId HAVING COUNT(T2.TrackId) > 20;
+42,gemma-4-12b-heretic-abliterated@q6_k,6676.59,0,incorrect_results,315,19,"SELECT ReportsTo, COUNT(*) FROM Employee WHERE ReportsTo IS NOT NULL GROUP BY ReportsTo;"
+42,gemini-3.1-flash-lite,1895.97,0,incorrect_results,300,18,"SELECT ReportsTo, COUNT(*) FROM Employee WHERE ReportsTo IS NOT NULL GROUP BY ReportsTo;"
+43,gemma-4-12b-heretic-abliterated@q6_k,7682.52,0,incorrect_results,311,49,SELECT c.Country FROM Customer c JOIN InvoiceLine il ON c.CustomerId = (SELECT CustomerId FROM Invoice WHERE InvoiceId = il.InvoiceId) GROUP BY c.Country ORDER BY SUM(il.Quantity) DESC LIMIT 1;
+43,gemini-3.1-flash-lite,2534.8,0,incorrect_results,296,64,SELECT T2.Country FROM InvoiceLine AS T1 INNER JOIN Invoice AS T3 ON T1.InvoiceId = T3.InvoiceId INNER JOIN Customer AS T2 ON T3.CustomerId = T2.CustomerId GROUP BY T2.Country ORDER BY SUM(T1.Quantity) DESC LIMIT 1;
+44,gemma-4-12b-heretic-abliterated@q6_k,16582.98,0,syntax_error,318,110,SELECT T1.Name FROM Artist AS T1 JOIN Track AS T2 ON T1.ArtistId = T2.ArtistId JOIN Genre AS T3 ON T2.GenreId = T3.GenreId WHERE T3.Name = 'Rock' INTERSECT SELECT T1.Name FROM Artist AS T1 JOIN Track AS T2 ON T1.ArtistId = T2.ArtistId JOIN Genre AS T3 ON T2.GenreId = T3.GenreId WHERE T3.Name = 'Metal';
+44,gemini-3.1-flash-lite,2763.56,0,gold_sql_error,303,143,SELECT T1.Name FROM Artist AS T1 JOIN Album AS T2 ON T1.ArtistId = T2.ArtistId JOIN Track AS T3 ON T2.AlbumId = T3.AlbumId JOIN Genre AS T4 ON T3.GenreId = T4.GenreId WHERE T4.Name = 'Rock' INTERSECT SELECT T1.Name FROM Artist AS T1 JOIN Album AS T2 ON T1.ArtistId = T2.ArtistId JOIN Track AS T3 ON T2.AlbumId = T3.AlbumId JOIN Genre AS T4 ON T3.GenreId = T4.GenreId WHERE T4.Name = 'Metal';
+45,gemma-4-12b-heretic-abliterated@q6_k,14570.4,0,incorrect_results,319,93,"SELECT T1.CustomerId, T1.FirstName, T1.LastName FROM Customer AS T1 JOIN Invoice AS T2 ON T1.CustomerId = T2.CustomerId JOIN InvoiceLine AS T3 ON T2.InvoiceId = T3.InvoiceId JOIN Track AS T4 ON T3.TrackId = T4.TrackId GROUP BY T1.CustomerId ORDER BY COUNT(DISTINCT T4.GenreId) DESC LIMIT 1;"
+45,gemini-3.1-flash-lite,2002.39,0,incorrect_results,304,92,"SELECT T1.CustomerId, T1.FirstName, T1.LastName FROM Customer AS T1 JOIN Invoice AS T2 ON T1.CustomerId = T2.CustomerId JOIN InvoiceLine AS T3 ON T2.InvoiceId = T3.InvoiceId JOIN Track AS T4 ON T3.TrackId = T4.TrackId GROUP BY T1.CustomerId ORDER BY COUNT(DISTINCT T4.GenreId) DESC LIMIT 1;"
+46,gemma-4-12b-heretic-abliterated@q6_k,6396.9,1,correct,312,13,SELECT MAX(Milliseconds) - MIN(Milliseconds) FROM Track;
+46,gemini-3.1-flash-lite,861.36,1,correct,297,13,SELECT MAX(Milliseconds) - MIN(Milliseconds) FROM Track;
+47,gemma-4-12b-heretic-abliterated@q6_k,15332.17,1,correct,314,91,"SELECT T1.Name, ROUND(SUM(T2.Milliseconds) / 3600000.0, 2) AS TotalDurationHours FROM Playlist AS T1 JOIN PlaylistTrack AS T3 ON T1.PlaylistId = T3.PlaylistId JOIN Track AS T2 ON T3.TrackId = T2.TrackId GROUP BY T1.PlaylistId ORDER BY TotalDurationHours DESC LIMIT 1;"
+47,gemini-3.1-flash-lite,3876.5,1,correct,299,76,"SELECT P.Name, ROUND(SUM(T.Milliseconds) / 3600000.0, 2) AS TotalHours FROM Playlist P JOIN PlaylistTrack PT ON P.PlaylistId = PT.PlaylistId JOIN Track T ON PT.TrackId = T.TrackId GROUP BY P.PlaylistId ORDER BY TotalHours DESC LIMIT 1;"
+48,gemma-4-12b-heretic-abliterated@q6_k,8737.05,1,correct,317,42,"SELECT ROUND(CAST(SUM(CASE WHEN BillingCountry = 'USA' THEN 1 ELSE 0 END) AS FLOAT) * 100 / COUNT(*), 2) FROM Invoice;"
+48,gemini-3.1-flash-lite,969.42,1,correct,302,36,"SELECT ROUND(100.0 * SUM(CASE WHEN BillingCountry = 'USA' THEN 1 ELSE 0 END) / COUNT(*), 2) FROM Invoice;"
+49,gemma-4-12b-heretic-abliterated@q6_k,10028.58,1,correct,314,85,SELECT T1.Name FROM Artist AS T1 JOIN Album AS T2 ON T1.ArtistId = T2.ArtistId LEFT JOIN Track AS T3 ON T2.AlbumId = T3.AlbumId LEFT JOIN InvoiceLine AS T4 ON T3.TrackId = T4.TrackId GROUP BY T1.ArtistId HAVING COUNT(T4.InvoiceLineId) = 0;
+49,gemini-3.1-flash-lite,1191.16,0,syntax_error,299,44,SELECT Name FROM Artist WHERE ArtistId IN (SELECT ArtistId FROM Album) AND ArtistId NOT IN (SELECT T.ArtistId FROM Track T JOIN InvoiceLine IL ON T.TrackId = IL.TrackId);
+50,gemma-4-12b-heretic-abliterated@q6_k,6313.43,0,incorrect_results,314,28,"SELECT strftime('%m', InvoiceDate) AS Month FROM Invoice GROUP BY Month ORDER BY SUM(Total) DESC LIMIT 1;"
+50,gemini-3.1-flash-lite,1195.25,0,incorrect_results,299,26,"SELECT strftime('%m', InvoiceDate) AS Month FROM Invoice GROUP BY Month ORDER BY SUM(Total) DESC LIMIT 1;"

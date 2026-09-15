@@ -1,0 +1,11 @@
+# API keys and secrets
+.env
+
+# Python virtual environment and cache
+.venv/
+__pycache__/
+*.pyc
+
+# Database and OS files
+chinook.db
+.DS_Store
