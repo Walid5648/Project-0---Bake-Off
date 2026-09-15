@@ -1,0 +1,26 @@
+Write exactly one read-only SQLite SELECT query (WITH and WITH RECURSIVE are allowed).
+Return only the SQL, with no explanation. Do not call tools or ask questions.
+Use the requested output columns in the requested order. Output aliases do not matter.
+Respect requested sorting and tie-breakers. Do not include extra columns.
+Use only the tables below. There is no chat history and no access to database contents.
+
+BUSINESS RULES
+- All money is integer cents in one currency (USD). Dates are ISO YYYY-MM-DD.
+- Line sales = quantity * unit_price_cents - discount_cents. discount_cents is a total line discount, not per unit.
+- Gross merchandise revenue includes completed orders only, after line discounts, before returns, excluding shipping.
+- Net merchandise revenue subtracts refund_cents from approved returns only. Attribute refunds to the original order's ordered_at, regardless of return date.
+- Count only completed orders for sales/spending questions unless the question explicitly specifies otherwise. A question asking for all orders includes every status.
+- Payment collection includes payments with status='succeeded' only; includes shipping and is measured by paid_at when a payment period is requested. Failed/pending payments are not collected cash.
+- Payments, shipments, and return lines can create multiple rows per order. Aggregate each source at the needed level before combining sums.
+- A delivered shipment is late when delivered_at > promised_at. NULL delivered_at means undelivered and is not a late delivery. An order is late if any delivered shipment is late.
+- Product membership refers to its directly assigned category unless descendants or a root category are explicitly requested.
+- Current product prices are not historical sales prices; use order_items.unit_price_cents for sales.
+- Months/quarters refer to calendar periods in 2025 unless specified. Date ranges include the start and exclude the end. Never use the current date.
+- Unless specified, customers/products with no qualifying activity are excluded from totals, averages, or rankings.
+- For ratios, use floating-point division; return NULL for an undefined denominator. Default numeric tolerance is 0.000001 absolute.
+
+SCHEMA
+{schema}
+
+QUESTION
+{question}

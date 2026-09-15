@@ -1,0 +1,14 @@
+{
+  "models": ["qwen2.5-coder:1.5b", "qwen2.5-coder:3b", "qwen2.5-coder:7b"],
+  "base_url": "http://127.0.0.1:11434",
+  "options": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 4096,
+    "num_predict": 1024,
+    "top_k": 1,
+    "top_p": 1,
+    "repeat_penalty": 1.0
+  },
+  "request_timeout_seconds": 300
+}
